@@ -20,9 +20,16 @@ namespace PriceQuotationApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Calculate(PriceQuotation priceQuotation)
+        public IActionResult Index(PriceQuotation priceQuotation)
         {
-            return View(priceQuotation);
+            if (ModelState.IsValid)
+            {
+                return View("PriceQuotation", priceQuotation);
+            }
+            else
+            {
+                return View(priceQuotation);
+            }
         }
 
         [HttpPost]

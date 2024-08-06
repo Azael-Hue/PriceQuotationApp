@@ -1,29 +1,32 @@
-﻿﻿﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model PriceQuotationApp.Models.PriceQuotation
+
+@{
+    ViewData["Title"] = "Price Quotation";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Price Quotation App</h1>
-</div>
+<h2>Price Quotation</h2>
 
-<div>
-
-    <p>
-        Subtotal: &emsp; <input type="number" id="subtotalValue" name="txtSubtotal">
-    </p>    <span id="subtotalError"></span> <br />
-
-    <p>
-        Disount percent: &emsp; <input type="number" id="discountPercentage" name="txtDiscountPercentage">
-    </p>    <span id="discountPercentageError"></span> <br />
-
-    <p>
-        Discount amount: &emsp; <span id="discountAmount"></span>
-    </p>
-
-    <p>
-        Total: &emsp; <span id="Total"></span>
-    </p>
-
-    <button type="button" id="calculateButton">Calculate</button>
-    <a href="google.com">Clear</a>
-</div>
+<form asp-action="Calculate" method="post">
+    <div>
+        <label for="Subtotal">Subtotal:</label>
+        <input asp-for="Subtotal" type="text" />
+        <span asp-validation-for="Subtotal" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="DiscountPercent">Discount Percent:</label>
+        <input asp-for="DiscountPercent" type="text" />
+        <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit">Calculate</button>
+        <a asp-action="Clear" asp-controller="PriceQuotation">Clear</a>
+    </div>
+    <div>
+        <label>Discount Amount:</label>
+        <span>@Model.DiscountAmount.ToString("C")</span>
+    </div>
+    <div>
+        <label>Total:</label>
+        <span>@Model.Total.ToString("C")</span>
+    </div>
+</form>
