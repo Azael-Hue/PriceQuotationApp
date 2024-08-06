@@ -13,9 +13,22 @@ namespace PriceQuotationApp.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(new PriceQuotation());
+        }
+
+        [HttpPost]
+        public IActionResult Calculate(PriceQuotation priceQuotation)
+        {
+            return View(priceQuotation);
+        }
+
+        [HttpPost]
+        public IActionResult Clear()
+        {
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
