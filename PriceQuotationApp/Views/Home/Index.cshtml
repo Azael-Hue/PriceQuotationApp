@@ -6,27 +6,31 @@
 
 <h2>Price Quotation</h2>
 
-<form asp-action="Calculate" method="post">
+<form asp-action="Index" method="post">
+
     <div>
-        <label for="Subtotal">Subtotal:</label>
-        <input asp-for="Subtotal" type="text" />
-        <span asp-validation-for="Subtotal" class="text-danger"></span>
+        <label asp-for="Subtotal">Subtotal:</label>
+        <input asp-for="Subtotal" type="number" />
     </div>
+
     <div>
-        <label for="DiscountPercent">Discount Percent:</label>
-        <input asp-for="DiscountPercent" type="text" />
-        <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+        <label asp-for="DiscountPercent">Discount Percent:</label>
+        <input asp-for="DiscountPercent" type="number" />
     </div>
+    
     <div>
         <button type="submit">Calculate</button>
-        <a asp-action="Clear" asp-controller="PriceQuotation">Clear</a>
+        <a asp-action="Index">Clear</a>
     </div>
+    
     <div>
         <label>Discount Amount:</label>
         <span>@Model.DiscountAmount.ToString("C")</span>
     </div>
+    
     <div>
         <label>Total:</label>
         <span>@Model.Total.ToString("C")</span>
     </div>
+
 </form>

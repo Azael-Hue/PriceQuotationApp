@@ -24,12 +24,24 @@ namespace PriceQuotationApp.Models
         /// <summary>
         /// This value is calculated by multiplying the subtotal by the discount percent
         /// </summary>
-        public decimal DiscountAmount => Subtotal * (DiscountPercent / 100);
+        public decimal DiscountAmount
+        {
+            get
+            {
+                return Subtotal * (DiscountPercent / 100);
+            }
+        }
 
         /// <summary>
         /// This value is calculated by subtracting the discount amount from the subtotal
         /// </summary>
-        public decimal Total => Subtotal - DiscountAmount;
+        public decimal Total
+        {
+            get
+            {
+                return Subtotal - DiscountAmount;
+            }
+        }
 
     }
 }

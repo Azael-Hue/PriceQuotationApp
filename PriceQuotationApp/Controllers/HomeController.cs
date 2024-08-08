@@ -1,52 +1,27 @@
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PriceQuotationApp.Models;
-using System.Diagnostics;
 
 namespace PriceQuotationApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet]
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            return View(new PriceQuotation());
+            PriceQuotation newQuote = new()
+            {
+                Subtotal = 0,
+                DiscountPercent = 0
+            };
+            return View( newQuote );
         }
 
         [HttpPost]
-        public IActionResult Index(PriceQuotation priceQuotation)
+        public IActionResult Index( PriceQuotation quote )
         {
-            if (ModelState.IsValid)
-            {
-                return View("PriceQuotation", priceQuotation);
-            }
-            else
-            {
-                return View(priceQuotation);
-            }
+            return View(quote);
         }
-
-        [HttpPost]
-        public IActionResult Clear()
-        {
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        
     }
 }
